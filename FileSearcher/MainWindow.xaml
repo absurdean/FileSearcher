@@ -1,12 +1,32 @@
-﻿<Window x:Class="FileSearcher.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FileSearcher"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+﻿<Window
+    x:Class="FileSearcher.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:filter="clr-namespace:DataGridFilterLibrary;assembly=DataGridFilterLibrary"
+    xmlns:local="clr-namespace:FileSearcher"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:FileSearcher.ViewModels"
+    xmlns:wpftoolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    Title="MainWindow"
+    Width="525"
+    Height="350"
+    d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+    mc:Ignorable="d">
     <Grid>
-        
+        <DataGrid ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl},                      ResourceId=DataGridHeaderFilterControlStyle}}">
+            <DataGrid.Style>
+                <Style TargetType="DataGrid">
+                    <Setter Property="ItemsSource" Value="{Binding FilesToShow}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=currentFolderCheck, Path=IsChecked}" Value="True">
+                            <Setter Property="ItemsSource" Value="{Binding FilesToShowInCurrentDir}" />
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Style>
+        </DataGrid>
+        <CheckBox Name="currentFolderCheck" />
     </Grid>
 </Window>
