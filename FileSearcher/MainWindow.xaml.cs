@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FileSearcher.ViewModels;
+using FileSearcher.Models;
 
 namespace FileSearcher
 {
@@ -24,7 +25,9 @@ namespace FileSearcher
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            IDataGridObject dataGridObject = new DataGridObject(dataGridFiles);
+            SearchManager searchManager = new SearchManager(dataGridObject);
+            DataContext = new MainViewModel(searchManager);
         }
     }
 }
