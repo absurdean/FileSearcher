@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSearcher", "FileSearcher\FileSearcher.csproj", "{35021775-0386-41C0-B8E2-D22E9D30CEF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginCommon", "PluginCommon\PluginCommon.csproj", "{DE40F8EA-1CB9-45E6-A70B-13DB48FDBAEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginTxt", "PluginTxt\PluginTxt.csproj", "{1C97F21B-6F93-4CC7-BB35-54A4C7979020}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{35021775-0386-41C0-B8E2-D22E9D30CEF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35021775-0386-41C0-B8E2-D22E9D30CEF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35021775-0386-41C0-B8E2-D22E9D30CEF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE40F8EA-1CB9-45E6-A70B-13DB48FDBAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE40F8EA-1CB9-45E6-A70B-13DB48FDBAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE40F8EA-1CB9-45E6-A70B-13DB48FDBAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE40F8EA-1CB9-45E6-A70B-13DB48FDBAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C97F21B-6F93-4CC7-BB35-54A4C7979020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C97F21B-6F93-4CC7-BB35-54A4C7979020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C97F21B-6F93-4CC7-BB35-54A4C7979020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C97F21B-6F93-4CC7-BB35-54A4C7979020}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

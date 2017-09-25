@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
+using PluginCommon;
+using System.IO;
 
 namespace FileSearcher.Models
 {
     public class FileReader
     {
-        public void GetFilesToShow(string path, List<File> filesToShow)
+        public void GetFilesToShow(string path, List<FileToSearch> filesToShow)
         {
             //List<File> filesToShow = new List<File>();
             try
@@ -16,7 +17,7 @@ namespace FileSearcher.Models
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShow.Add(new File(f.Name,f.Length,f.LastWriteTime));
+                    filesToShow.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime));
                     //text.WriteLine(f.Name);
                     //Console.WriteLine(f.Name);
                 }
@@ -33,7 +34,7 @@ namespace FileSearcher.Models
            // return filesToShow;
         }
 
-        public void GetFilesToShowInCurrentDir(string path, List<File> filesToShowInCurrentDir)
+        public void GetFilesToShowInCurrentDir(string path, List<FileToSearch> filesToShowInCurrentDir)
         {
             try
             {
@@ -41,7 +42,7 @@ namespace FileSearcher.Models
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShowInCurrentDir.Add(new File(f.Name,f.Length,f.LastWriteTime));
+                    filesToShowInCurrentDir.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime));
                 }
             }
             catch (Exception e)

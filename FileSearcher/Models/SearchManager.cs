@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using PluginCommon;
 
 namespace FileSearcher.Models
 {
@@ -14,7 +15,7 @@ namespace FileSearcher.Models
         {
             _dataGridFiles = dataGridFiles as DataGridObject;
         }
-        public void SearchFiles(ObservableCollection<File> filteringFiles,List<File> filesToSearch,string containingWord, double lowerSize, double upperSize, DateTime filterDate)
+        public void SearchFiles(ObservableCollection<FileToSearch> filteringFiles,List<FileToSearch> filesToSearch,string containingWord, double lowerSize, double upperSize, DateTime filterDate)
         {
             filteringFiles.Clear();
             foreach (var file in filesToSearch)

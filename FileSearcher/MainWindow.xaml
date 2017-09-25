@@ -129,7 +129,7 @@
                 VerticalAlignment="Center"
                 Content="Only files in current directory"
                 IsChecked="{Binding IsCurrentFolder}" />
-
+            <ContentControl Content="{Binding PluginView}" />
         </StackPanel>
     </Grid>
 </Window>

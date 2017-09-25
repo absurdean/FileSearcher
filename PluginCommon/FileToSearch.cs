@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FileSearcher.Models
+namespace PluginCommon
 {
-    public class File
+    public class FileToSearch
     {
-        public File(string name, double size,DateTime date)
+        public FileToSearch(string name, double size,DateTime date)
         {
             Name = name;
             Size = size;
