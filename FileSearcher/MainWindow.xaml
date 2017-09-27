@@ -6,13 +6,19 @@
     xmlns:filter="clr-namespace:DataGridFilterLibrary;assembly=DataGridFilterLibrary"
     xmlns:local="clr-namespace:FileSearcher"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:FileSearcher.Models"
     xmlns:viewModels="clr-namespace:FileSearcher.ViewModels"
     xmlns:wpftoolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
     Title="MainWindow"
     Width="600"
     Height="500"
+    MinWidth="600"
+    MinHeight="500"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     mc:Ignorable="d">
+    <Window.Resources>
+        <models:FileSizeConverter x:Key="fileSizeConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
@@ -22,6 +28,7 @@
         <StackPanel
             Grid.Row="0"
             Height="100"
+            Margin="10"
             VerticalAlignment="Top"
             Orientation="Vertical">
             <StackPanel
@@ -29,19 +36,21 @@
                 Margin="0,0,0,0"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
-                <Label Content="Contains" />
-                <TextBox
-                    Width="200"
-                    Height="22"
+                <ContentControl
+                    Name="contentControl"
                     Margin="5,0"
+                    Content="{Binding PluginView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox
+                    Name="currentFolderCheck"
+                    Margin="10,0"
                     VerticalAlignment="Center"
-                    BorderBrush="#FF878787"
-                    Text="{Binding ContainingWord}" />
-                <Label Content="Size" />
+                    Content="Search in subfolders"
+                    IsChecked="{Binding IsSubloders}" />
 
                 <DatePicker
                     Name="datePicker1"
                     Height="25"
+                    Margin="5,0"
                     SelectedDateFormat="Short"
                     Text="{Binding FilterDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=d}" />
 
@@ -56,6 +65,7 @@
             </StackPanel>
             <StackPanel
                 Height="30"
+                Margin="5,0"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
                 <local:RangeSlider
@@ -70,28 +80,31 @@
             </StackPanel>
             <StackPanel
                 Height="30"
+                Margin="5,0"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
                 <Label Margin="0,0,0,0" Content="Min" />
 
-                <TextBox
+                <TextBlock
                     Height="20"
                     Margin="5,1,10,1"
-                    Text="{Binding ElementName=slider, Path=LowerValue}" />
+                    Text="{Binding ElementName=slider, Path=LowerValue, Converter={StaticResource fileSizeConverter}}" />
                 <Label Margin="200,0,0,0" Content="Max" />
-                <TextBox
+                <TextBlock
                     Height="20"
                     Margin="5,1,10,1"
-                    Text="{Binding ElementName=slider, Path=UpperValue}" />
+                    Text="{Binding ElementName=slider, Path=UpperValue, Converter={StaticResource fileSizeConverter}}" />
             </StackPanel>
         </StackPanel>
         <DataGrid
             Name="dataGridFiles"
             Grid.Row="1"
             AutoGenerateColumns="False"
-            ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl},
-                                                                     ResourceId=DataGridHeaderFilterControlStyle}}"
             ItemsSource="{Binding FilesToShow}">
+            <!--
+                ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl},
+                ResourceId=DataGridHeaderFilterControlStyle}}"
+            -->
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="250"
@@ -121,15 +134,32 @@
         <StackPanel
             Grid.Row="2"
             Height="30"
-            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Orientation="Horizontal">
-
-            <CheckBox
-                Name="currentFolderCheck"
+            <ComboBox
+                Name="comboBoxPlugins"
+                Height="22"
+                Margin="5,0"
+                ItemsSource="{Binding PluginNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedIndex="0" />
+            <Button
+                Width="100"
+                Height="22"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Content="Only files in current directory"
-                IsChecked="{Binding IsCurrentFolder}" />
-            <ContentControl Content="{Binding PluginView}" />
+                Command="{Binding ChangePluginCommand}"
+                Content="Change Plugin" />
+            <Button
+                Width="100"
+                Height="22"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding RefreshPluginCommand}"
+                Content="Refresh Plugins" />
+
         </StackPanel>
     </Grid>
 </Window>

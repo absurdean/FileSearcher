@@ -1,29 +1,31 @@
 ﻿using PluginCommon;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
-namespace PluginTxt
+namespace PluginMp3
 {
     [Export(typeof(IView)), PartCreationPolicy(CreationPolicy.Any)]
-    [ExportMetadata("Name", "TXT Plugin")]
-    public partial class SubstringSearchControl : UserControl, IView
+    [ExportMetadata("Name", "MP3 Plugin")]
+    public partial class MP3SearchControl : UserControl, IView
     {
-        public SubstringSearchControl()
+        public MP3SearchControl()
         {
             InitializeComponent();
         }
-
         public string SpecialAttribute
         {
             get
             {
-               return textBoxSubstring.Text;
+                return textBoxMP3Header.Text;
             }
 
             set
             {
-                textBoxSubstring.Text=value;
+                textBoxMP3Header.Text = value;
             }
         }
-    }
+    
+}
 }

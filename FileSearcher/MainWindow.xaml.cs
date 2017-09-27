@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FileSearcher.ViewModels;
 using FileSearcher.Models;
+using PluginCommon;
 
 namespace FileSearcher
 {
@@ -25,9 +26,9 @@ namespace FileSearcher
         public MainWindow()
         {
             InitializeComponent();
-            IDataGridObject dataGridObject = new DataGridObject(dataGridFiles);
-            SearchManager searchManager = new SearchManager(dataGridObject);
-            DataContext = new MainViewModel(searchManager);
+            PluginCommon.DataGridObject dataGridObject = new PluginCommon.DataGridObject(dataGridFiles);
+            //SearchManager searchManager = new SearchManager(dataGridObject);
+            DataContext = new MainViewModel(null,comboBoxPlugins, contentControl,dataGridObject);
         }
     }
 }

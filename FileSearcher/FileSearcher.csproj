@@ -89,6 +89,7 @@
     </ApplicationDefinition>
     <Compile Include="IDataGridObject.cs" />
     <Compile Include="Models\DataGridObject.cs" />
+    <Compile Include="Models\FileSizeConverter.cs" />
     <Compile Include="Models\PluginHost.cs" />
     <Compile Include="Models\SearchManager.cs" />
     <Compile Include="Models\SelectFolderDialog.cs" />

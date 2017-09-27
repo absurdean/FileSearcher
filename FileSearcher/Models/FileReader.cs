@@ -17,7 +17,7 @@ namespace FileSearcher.Models
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShow.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime));
+                    filesToShow.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
                     //text.WriteLine(f.Name);
                     //Console.WriteLine(f.Name);
                 }
@@ -42,7 +42,7 @@ namespace FileSearcher.Models
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShowInCurrentDir.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime));
+                    filesToShowInCurrentDir.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
                 }
             }
             catch (Exception e)
