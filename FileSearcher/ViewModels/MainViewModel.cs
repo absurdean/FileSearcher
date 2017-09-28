@@ -33,18 +33,9 @@ namespace FileSearcher.ViewModels
 
 
         private List<PluginCommon.IView> _pluginControls;
-        public List<PluginCommon.IView> PluginControls
-        {
-            get { return _pluginControls; }
-            set
-            {
-                _pluginControls = value;
-                OnPropertyChanged(nameof(_pluginControls));
-            }
-        }
 
-        private List<string> _pluginNames;
-        public List<string> PluginNames
+        private ObservableCollection<string> _pluginNames;
+        public ObservableCollection<string> PluginNames
         {
             get { return _pluginNames; }
             set
@@ -66,10 +57,21 @@ namespace FileSearcher.ViewModels
         private List<IPlugin> _methods = new List<IPlugin>();
 
         private int _pluginIndex;
+
+        private bool _isStopSearch;
+        public bool IsStopSearch
+        {
+            get { return _isStopSearch; }
+            set
+            {
+                _isStopSearch = value;
+                OnPropertyChanged(nameof(_isStopSearch));
+            }
+        }
         //убрать при рефакторе
         private ComboBox _comboBoxPlugins;
 
-        public MainViewModel(SearchManager searchManager, ComboBox comboBoxPlugins, ContentControl contentControl, PluginCommon.DataGridObject dataGridFiles)
+        public MainViewModel(SelectFolderDialog selectFolderObj, ComboBox comboBoxPlugins, ContentControl contentControl)
         {
             _comboBoxPlugins = comboBoxPlugins;
             _pluginIndex = 1;
@@ -77,43 +79,39 @@ namespace FileSearcher.ViewModels
             _filterDate = DateTime.Now;
             _containingWord = "";
             _catalog = new AggregateCatalog();
-           
-            
+            _pluginNames = new ObservableCollection<string>();
+
+            _selectFolderObj = selectFolderObj;
             //Here we add all the parts found in all assemblies in directory of executing assembly directory
             //with file name matching Plugin*.dll
-            string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            pluginsPath = Path.Combine(pluginsPath, "plugins");
-            if (!Directory.Exists(pluginsPath))
-                Directory.CreateDirectory(pluginsPath);
-            _catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath, "Plugin*.dll"));
+    
 
             RefreshPlugins();
 
-            PluginView = PluginControls[0];
-           
-            _searchManager = searchManager;
+            PluginView = _pluginControls[0];
 
             FileReader fr = new FileReader();
            _filesToSearching = new List<FileToSearch>();
             _filesToSearchingInCurrentDir=new List<FileToSearch>();
-            List<FileToSearch> cd = new List<FileToSearch>();
-            SelectFolderDialog sfd = new SelectFolderDialog();
+
             //string path=sfd.SelectFolder();
-            fr.GetFilesToShow(@"F:\bookfilter\www",_filesToSearching);
+            fr.GetFilesToShow(@"F:\music new", _filesToSearching);
             //fr.GetFilesToShow(path, lf);
-            fr.GetFilesToShowInCurrentDir(@"F:\bookfilter\www", _filesToSearchingInCurrentDir);
+            fr.GetFilesToShowInCurrentDir(@"F:\music new", _filesToSearchingInCurrentDir);
             _filesToShow = new ObservableCollection<FileToSearch>(_filesToSearching);
-            _filesToShowInCurrentDir = new ObservableCollection<FileToSearch>(cd);
 
             _searchFilesCommand = new DelegateCommand(() =>
             {
-                if (_isSubfolders)
+                if (_filesToSearching != null)
                 {
-                    _methods[_pluginIndex].SearchFiles(FilesToShow, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, dataGridFiles);//method.SearchFiles(FilesToShow, _filesToSearchingInCurrentDir, _containingWord, LowerSize, UpperSize, FilterDate);
-                }
-                else
-                {
-                    _methods[_pluginIndex].SearchFiles(FilesToShow, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate,dataGridFiles);
+                    if (_isSubfolders)
+                    {
+                        _methods[_pluginIndex].SearchFiles(FilesToShow, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                    }
+                    else
+                    {
+                        _methods[_pluginIndex].SearchFiles(FilesToShow, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                    }
                 }
             });
 
@@ -127,21 +125,38 @@ namespace FileSearcher.ViewModels
             {
                 RefreshPlugins();
             });
+            _stopSearchCommand = new DelegateCommand(() =>
+            {
+                _isStopSearch = true;
+            });
+
+            _changeFolderCommand = new DelegateCommand(() =>
+            {
+                _searchingPath=_selectFolderObj.SelectFolder();
+            });
         }
 
 
         private void RefreshPlugins()
         {
+            _catalog = new AggregateCatalog();
+            string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            pluginsPath = Path.Combine(pluginsPath, "plugins");
+            if (!Directory.Exists(pluginsPath))
+                Directory.CreateDirectory(pluginsPath);
+            _catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath, "Plugin*.dll"));
             _container = new CompositionContainer(_catalog);
             _container.ComposeParts(this);
-            PluginNames = new List<string>();
-            PluginControls = new List<PluginCommon.IView>();
+
+                PluginNames=new ObservableCollection<string>();
+            _pluginControls = new List<PluginCommon.IView>();
 
             foreach (var pluginControl in Plugins)
             {
-                PluginControls.Add(pluginControl.Value);
+                _pluginControls.Add(pluginControl.Value);
                 PluginNames.Add(pluginControl.Metadata.Name);
             }
+            _comboBoxPlugins.Items.Refresh();
 
             foreach (var method in SearchMethod)
             {
@@ -149,11 +164,11 @@ namespace FileSearcher.ViewModels
             }
         }
 
-
-
-        private SearchManager _searchManager;
+        private SelectFolderDialog _selectFolderObj;
         private List<FileToSearch> _filesToSearching;
         private List<FileToSearch> _filesToSearchingInCurrentDir;
+        private string _searchingPath="";
+
         private ObservableCollection<FileToSearch> _filesToShow;
         public ObservableCollection<FileToSearch> FilesToShow
         {
@@ -220,23 +235,21 @@ namespace FileSearcher.ViewModels
             }
         }
 
-        private ObservableCollection<FileToSearch> _filesToShowInCurrentDir;
-        public ObservableCollection<FileToSearch> FilesToShowInCurrentDir
-        {
-            get { return _filesToShowInCurrentDir; }
-            set
-            {
-                _filesToShowInCurrentDir = value;
-                OnPropertyChanged(nameof(_filesToShowInCurrentDir));
-            }
-        }
-
         private ICommand _searchFilesCommand;
         public ICommand SearchFilesCommand
         {
             get
             {
                 return _searchFilesCommand;
+            }
+        }
+
+        private ICommand _stopSearchCommand;
+        public ICommand StopSearchCommand
+        {
+            get
+            {
+                return _stopSearchCommand;
             }
         }
 
@@ -255,6 +268,15 @@ namespace FileSearcher.ViewModels
             get
             {
                 return _refreshPluginCommand;
+            }
+        }
+
+        private ICommand _changeFolderCommand;
+        public ICommand ChangeFolderCommand
+        {
+            get
+            {
+                return _changeFolderCommand;
             }
         }
     }

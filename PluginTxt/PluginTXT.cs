@@ -6,29 +6,25 @@ using PluginCommon;
 using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Mvvm;
 using System.Windows;
+using System.Threading;
+using System.Windows.Data;
 
 namespace PluginTxt
 {
     [Export(typeof(IPlugin))]
     public class PluginTXT : IPlugin
     {
-        public void SearchFiles(ObservableCollection<FileToSearch> filteringFiles, List<FileToSearch> filesToSearch, string specialAttribute, double lowerSize, double upperSize, DateTime filterDate, DataGridObject dataGridFiles)
+        public void SearchFiles(ObservableCollection<FileToSearch> filteringFiles, List<FileToSearch> filesToSearch, string specialAttribute, double lowerSize, double upperSize, DateTime filterDate, bool stop)
         {
+            stop = false;
             filteringFiles.Clear();
             foreach (var file in filesToSearch)
             {
-                if (file.Name.EndsWith(".txt"))
+                if (!stop)
                 {
-                    if ((file.Size >= lowerSize) && (file.Size <= upperSize))
+                    if ((file.Name.EndsWith(".txt")) && (file.Size >= lowerSize) && (file.Size <= upperSize) && (file.LastChangingDate <= filterDate)&&(SearchManager.ContainsWord(file.Path, specialAttribute)))
                     {
-                        if (file.LastChangingDate <= filterDate)
-                        {
-                            if (SearchManager.ContainsWord(file.Path, specialAttribute))
-                            {
-                                filteringFiles.Add(file);
-                                dataGridFiles.DataGrid.UpdateLayout();
-                            }
-                        }
+                        filteringFiles.Add(file);
                     }
                 }
             }

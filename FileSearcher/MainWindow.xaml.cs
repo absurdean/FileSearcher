@@ -26,9 +26,8 @@ namespace FileSearcher
         public MainWindow()
         {
             InitializeComponent();
-            PluginCommon.DataGridObject dataGridObject = new PluginCommon.DataGridObject(dataGridFiles);
-            //SearchManager searchManager = new SearchManager(dataGridObject);
-            DataContext = new MainViewModel(null,comboBoxPlugins, contentControl,dataGridObject);
+            SelectFolderDialog selectFolderObj = new SelectFolderDialog(this);
+            DataContext = new MainViewModel(selectFolderObj,comboBoxPlugins, contentControl);
         }
     }
 }

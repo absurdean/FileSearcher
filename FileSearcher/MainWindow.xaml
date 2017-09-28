@@ -15,6 +15,7 @@
     MinWidth="600"
     MinHeight="500"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
         <models:FileSizeConverter x:Key="fileSizeConverter" />
@@ -45,7 +46,7 @@
                     Margin="10,0"
                     VerticalAlignment="Center"
                     Content="Search in subfolders"
-                    IsChecked="{Binding IsSubloders}" />
+                    IsChecked="{Binding IsCurrentFolder}" />
 
                 <DatePicker
                     Name="datePicker1"
@@ -62,6 +63,14 @@
                     VerticalAlignment="Center"
                     Command="{Binding SearchFilesCommand}"
                     Content="Search" />
+                <Button
+                    Width="75"
+                    Height="22"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Command="{Binding StopSearchCommand}"
+                    Content="Stop" />
             </StackPanel>
             <StackPanel
                 Height="30"
@@ -100,7 +109,7 @@
             Name="dataGridFiles"
             Grid.Row="1"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding FilesToShow}">
+            ItemsSource="{Binding FilesToShow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <!--
                 ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl},
                 ResourceId=DataGridHeaderFilterControlStyle}}"
@@ -112,11 +121,11 @@
                     Header="Name" />
                 <DataGridTextColumn
                     Width="100"
-                    Binding="{Binding Size}"
+                    Binding="{Binding Size, Converter={StaticResource fileSizeConverter}}"
                     Header="Size" />
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding LastChangingDate, StringFormat=d}"
+                    Binding="{Binding LastChangingDate}"
                     Header="Last time changing" />
             </DataGrid.Columns>
             <!--<DataGrid.Style>
@@ -159,6 +168,14 @@
                 VerticalAlignment="Center"
                 Command="{Binding RefreshPluginCommand}"
                 Content="Refresh Plugins" />
+            <Button
+                Width="100"
+                Height="22"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding ChangeFolderCommand}"
+                Content="Change Folder" />
 
         </StackPanel>
     </Grid>
