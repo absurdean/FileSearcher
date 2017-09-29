@@ -43,7 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\bin\Debug\PluginCommon.dll</HintPath>
+      <HintPath>..\PluginCommon\obj\Debug\PluginCommon.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

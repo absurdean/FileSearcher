@@ -18,7 +18,9 @@ namespace PluginMp3
         {
             get
             {
-                return textBoxMP3Header.Text;
+                string text = "";
+                Dispatcher.Invoke(() => text = textBoxMP3Header.Text);
+                return text;
             }
 
             set

@@ -15,21 +15,16 @@ namespace FileSearcher.Models
         {
             _dataGridFiles = dataGridFiles as DataGridObject;
         }
-        public void SearchFiles(ObservableCollection<FileToSearch> filteringFiles,List<FileToSearch> filesToSearch,string containingWord, double lowerSize, double upperSize, DateTime filterDate)
+        public static void SearchFiles(ObservableCollection<FileToSearch> filteringFiles,List<FileToSearch> filesToSearch, double lowerSize, double upperSize, DateTime filterDate)
         {
             filteringFiles.Clear();
             foreach (var file in filesToSearch)
             {
-                if (file.Name.Contains(containingWord))
-                {
                     if ((file.Size >= lowerSize) && (file.Size <= upperSize))
                     {
                         if (file.LastChangingDate <= filterDate)
                         {
                             filteringFiles.Add(file);
-                            _dataGridFiles.DataGrid.UpdateLayout();
-                            Task.Delay(3000);
-                        }
                     }
                 }
             }

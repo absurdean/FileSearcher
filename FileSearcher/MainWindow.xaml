@@ -46,7 +46,7 @@
                     Margin="10,0"
                     VerticalAlignment="Center"
                     Content="Search in subfolders"
-                    IsChecked="{Binding IsCurrentFolder}" />
+                    IsChecked="{Binding IsSubfolders}" />
 
                 <DatePicker
                     Name="datePicker1"
