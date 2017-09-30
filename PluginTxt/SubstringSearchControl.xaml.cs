@@ -17,7 +17,9 @@ namespace PluginTxt
         {
             get
             {
-               return textBoxSubstring.Text;
+                string text = "";
+                Dispatcher.Invoke(() => text = textBoxSubstring.Text);
+                return text;
             }
 
             set

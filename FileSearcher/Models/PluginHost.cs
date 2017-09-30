@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FileSearcher.Models
@@ -41,28 +42,35 @@ namespace FileSearcher.Models
             {
                 methods.Clear();
             }
-            AggregateCatalog catalog = new AggregateCatalog();
-            string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            pluginsPath = Path.Combine(pluginsPath, "plugins");
-            if (!Directory.Exists(pluginsPath))
-                Directory.CreateDirectory(pluginsPath);
-            catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath, "Plugin*.dll"));
-            CompositionContainer container = new CompositionContainer(catalog);
-            container.ComposeParts(this);
-
-            foreach (var pluginControl in Plugins)
+            try
             {
-                pluginControls.Add(pluginControl.Value);
-                PluginNames.Add(pluginControl.Metadata.Name);
+                AggregateCatalog catalog = new AggregateCatalog();
+                string pluginsPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                pluginsPath = Path.Combine(pluginsPath, "plugins");
+                if (!Directory.Exists(pluginsPath))
+                    Directory.CreateDirectory(pluginsPath);
+                catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath, "Plugin*.dll"));
+                CompositionContainer container = new CompositionContainer(catalog);
+                container.ComposeParts(this);
+
+                foreach (var pluginControl in Plugins)
+                {
+                    pluginControls.Add(pluginControl.Value);
+                    PluginNames.Add(pluginControl.Metadata.Name);
+                }
+
+                foreach (var method in SearchMethod)
+                {
+                    methods.Add(method.Value);
+                }
             }
-
-            foreach (var method in SearchMethod)
+            catch (Exception ex)
             {
-                methods.Add(method.Value);
+                MessageBox.Show("Plugin isn't valid. Error: " + ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
-        public IView ChangePlugins(ObservableCollection<IView> pluginControls, int pluginIndex)
+        public IView ChangePlugins(ObservableCollection<IView> pluginControls,ref int pluginIndex)
         {
             pluginIndex = 0;
             if (pluginControls.Count != 0)

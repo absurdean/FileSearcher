@@ -13,6 +13,7 @@ namespace FileSearcher.Models
             //List<File> filesToShow = new List<File>();
             try
             {
+               
                 DirectoryInfo dir = new DirectoryInfo(path);
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
@@ -38,6 +39,10 @@ namespace FileSearcher.Models
         {
             try
             {
+                if (filesToShowInCurrentDir != null)
+                {
+                    filesToShowInCurrentDir=new List<FileToSearch>();
+                }
                 DirectoryInfo dir = new DirectoryInfo(path);
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)

@@ -62,7 +62,19 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding SearchFilesCommand}"
-                    Content="Search" />
+                    Content="Search">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSearchEnabled}" Value="False">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
                 <Button
                     Width="75"
                     Height="22"
@@ -70,7 +82,8 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Command="{Binding StopSearchCommand}"
-                    Content="Stop" />
+                    Content="Stop"
+                    IsEnabled="{Binding IsStopEnabled, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <StackPanel
                 Height="30"

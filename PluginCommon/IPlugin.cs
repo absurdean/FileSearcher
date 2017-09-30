@@ -4,8 +4,12 @@ using System.Collections.ObjectModel;
 
 namespace PluginCommon
 {
+    /// <summary>
+    /// <param name="filteringFiles">files to show in datagrid, clear before add objects</param>
+    /// 
+    /// </summary>
     public interface IPlugin
     {
-        void SearchFiles(ObservableCollection<FileToSearch> filteringFiles, List<FileToSearch> filesToSearch, string specialAttribute, double lowerSize, double upperSize, DateTime filterDate, bool stop);
+        bool SearchFiles(Func<FileToSearch, bool> addFilesAndRefresh, List<FileToSearch> filesToSearch,string specialAttribute, double lowerSize, double upperSize, DateTime filterDate, bool stop);
     }
 }
