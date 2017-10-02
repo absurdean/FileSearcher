@@ -21,12 +21,12 @@ namespace PluginMp3
                     {
                         break;
                     }
-                    if (file.Name.EndsWith(".mp3") && (file.Size >= lowerSize) && (file.Size <= upperSize) && (file.LastChangingDate <= filterDate))
+                    if (file.Name.ToLower().EndsWith(".mp3") && (file.Size >= lowerSize) && (file.Size <= upperSize) && (file.LastChangingDate <= filterDate))
                     {
                         if (File.Exists(file.Path))
                         {
                             var tagFile = TagLib.File.Create(file.Path);
-                            if ((tagFile.Tag.FirstAlbumArtist != null) && (tagFile.Tag.FirstAlbumArtist.ToLower().Contains(specialAttribute.Trim().ToLower())))
+                            if ((tagFile.Tag.FirstAlbumArtist != null) && (tagFile.Tag.FirstAlbumArtist.ToLower().Trim().Contains(specialAttribute.Trim().ToLower().Trim())))
                             {
                                 Thread.Sleep(100);
                                 stop=addFilesAndRefresh.Invoke(file);
@@ -34,7 +34,10 @@ namespace PluginMp3
                         }
                     }
                 }
-                MessageBox.Show("Searching completed!", " ", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                if (!stop)
+                {
+                    MessageBox.Show("Searching completed!", " ", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                }
                 return true;
             }
             catch (FileNotFoundException ex1)

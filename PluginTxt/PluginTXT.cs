@@ -20,13 +20,16 @@ namespace PluginTxt
                     {
                         break;
                     }
-                    if ((file.Name.EndsWith(".txt")) && (file.Size >= lowerSize) && (file.Size <= upperSize) && (file.LastChangingDate <= filterDate) && (SearchManager.ContainsWord(file.Path, specialAttribute)))
+                    if ((file.Name.ToLower().EndsWith(".txt")) && (file.Size >= lowerSize) && (file.Size <= upperSize) && (file.LastChangingDate <= filterDate) && (SearchManager.ContainsWord(file.Path, specialAttribute)))
                     {
                         Thread.Sleep(100);
                         stop = addFilesAndRefresh.Invoke(file);
                     }
                 }
-                MessageBox.Show("Searching completed!", " ", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                if (!stop)
+                {
+                    MessageBox.Show("Searching completed!", " ", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
+                }
                 return true;
             }
             catch(Exception ex)

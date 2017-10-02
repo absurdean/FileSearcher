@@ -10,17 +10,13 @@ namespace FileSearcher.Models
     {
         public void GetFilesToShow(string path, List<FileToSearch> filesToShow)
         {
-            //List<File> filesToShow = new List<File>();
             try
-            {
-               
+            {               
                 DirectoryInfo dir = new DirectoryInfo(path);
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
                     filesToShow.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
-                    //text.WriteLine(f.Name);
-                    //Console.WriteLine(f.Name);
                 }
 
                 foreach (DirectoryInfo d in dir.GetDirectories())
@@ -32,7 +28,6 @@ namespace FileSearcher.Models
             {
                 MessageBox.Show(e.Message);
             }
-           // return filesToShow;
         }
 
         public void GetFilesToShowInCurrentDir(string path, List<FileToSearch> filesToShowInCurrentDir)
@@ -55,7 +50,5 @@ namespace FileSearcher.Models
                 MessageBox.Show(e.Message);
             }
         }
-
-
     }
 }

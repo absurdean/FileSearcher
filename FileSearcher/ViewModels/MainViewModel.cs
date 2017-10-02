@@ -15,7 +15,7 @@ namespace FileSearcher.ViewModels
     {
         public MainViewModel(Window mainUI,SelectFolderDialog selectFolderObj,PluginHost pluginHost)
         {   
-            _upperSize = 9999999;
+            _upperSize = 99999999;
             _filterDate = DateTime.Now;
             _containingWord = "";
             _pluginNames = new ObservableCollection<string>();
@@ -43,36 +43,7 @@ namespace FileSearcher.ViewModels
 
             _searchFilesCommand = new DelegateCommand(() =>
             {
-                if (PluginView != null)
-                {
-                    if ((_filesToSearching.Count != 0) && (_filesToSearching != null))
-                    {
-                        _isSearchEnabled = false;
-                        FilesToShow.Clear();
-                        if (_isSubfolders)
-                        {
-                            Task.Run(() =>
-                            {
-                                _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
-                            });
-                        }
-                        else
-                        {
-                            Task.Run(() =>
-                            {
-                                _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
-                            });
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("List of files is empty", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Any plugins was found", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                Search();
             }, SearchCommand_CanExecute);
 
             _changePluginCommand = new DelegateCommand(() =>
@@ -93,21 +64,9 @@ namespace FileSearcher.ViewModels
             _changeFolderCommand = new DelegateCommand(() =>
             {
                 _selectFolderObj.ChangeFolder(_filesToSearching,_filesToSearchingInCurrentDir,FilesToShow);
-                //FilesToShow.Clear();
-                //_searchingPath=_selectFolderObj.SelectFolder();
-                //fr.GetFilesToShow(_searchingPath, _filesToSearching);
-                //fr.GetFilesToShowInCurrentDir(_searchingPath, _filesToSearchingInCurrentDir);
-                //foreach (var fileSearch in _filesToSearching)
-                //{
-                //    FilesToShow.Add(fileSearch);
-                //}
             });
         }
 
-        //private void _searchFilesCommand_CanExecuteChanged(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private Window _mainUI;
         public bool AddFileAndRefresh(FileToSearch file)
@@ -121,7 +80,39 @@ namespace FileSearcher.ViewModels
             else { return false; }
         }
 
-
+        private void Search()
+        {
+            if (PluginView != null)
+            {
+                if ((_filesToSearching.Count != 0) && (_filesToSearching != null))
+                {
+                    _isSearchEnabled = false;
+                    FilesToShow.Clear();
+                    if (_isSubfolders)
+                    {
+                        Task.Run(() =>
+                        {
+                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                        });
+                    }
+                    else
+                    {
+                        Task.Run(() =>
+                        {
+                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                        });
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("List of files is empty", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Any plugins was found", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
         private SelectFolderDialog _selectFolderObj;
         private List<FileToSearch> _filesToSearching;
@@ -187,7 +178,7 @@ namespace FileSearcher.ViewModels
             set
             {
                 _filesToShow = value;
-                OnPropertyChanged("FilesToShow");
+                OnPropertyChanged(nameof(_filesToShow));
             }
         }
 

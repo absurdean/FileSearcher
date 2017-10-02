@@ -72,18 +72,26 @@ namespace FileSearcher.Models
 
         public IView ChangePlugins(ObservableCollection<IView> pluginControls,ref int pluginIndex)
         {
-            pluginIndex = 0;
-            if (pluginControls.Count != 0)
+            try
             {
-                if (_comboBox.SelectedIndex != -1)
+                pluginIndex = 0;
+                if (pluginControls.Count != 0)
                 {
-                    pluginIndex = _comboBox.SelectedIndex;
+                    if (_comboBox.SelectedIndex != -1)
+                    {
+                        pluginIndex = _comboBox.SelectedIndex;
+                    }
+                    var pluginView = pluginControls[pluginIndex];
+                    _contentControl.Content = pluginView;
+                    return pluginView;
                 }
-                var pluginView = pluginControls[pluginIndex];
-                _contentControl.Content = pluginView;
-                return pluginView;
+                return null;
             }
-            return null;
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error with changing plugin" + ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
         }
     }
 }

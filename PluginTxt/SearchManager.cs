@@ -14,7 +14,7 @@ namespace PluginTxt
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
-                        if (line.Contains(attribute))
+                        if (line.ToLower().Trim().Contains(attribute.ToLower().Trim()))
                         {
                             return true;
                         }

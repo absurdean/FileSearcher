@@ -18,7 +18,6 @@ namespace FileSearcher.Models
                 size /= 1024;
                 ++unit;
             }
-
             return String.Format("{0:0.#} {1}", size, units[unit]);
         }
 
