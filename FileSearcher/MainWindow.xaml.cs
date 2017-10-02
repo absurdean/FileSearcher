@@ -2,6 +2,7 @@
 using FileSearcher.ViewModels;
 using FileSearcher.Models;
 using PluginCommon;
+using System.Collections.ObjectModel;
 
 namespace FileSearcher
 {
@@ -13,9 +14,10 @@ namespace FileSearcher
         public MainWindow()
         {
             InitializeComponent();
-            PluginCommon.DataGridObject dataGrid = new PluginCommon.DataGridObject(dataGridFiles);
-            SelectFolderDialog selectFolderObj = new SelectFolderDialog(this,dataGrid);
-            PluginHost pluginHost = new PluginHost(contentControl, comboBoxPlugins);
+            ComboBoxObject comboBox = new ComboBoxObject(comboBoxPlugins);
+            ContentControlObject contentControls = new ContentControlObject(contentControl);
+            SelectFolderDialog selectFolderObj = new SelectFolderDialog(this);
+            PluginHost pluginHost = new PluginHost(contentControls, comboBox);
             DataContext = new MainViewModel(this,selectFolderObj,pluginHost);
         }
     }

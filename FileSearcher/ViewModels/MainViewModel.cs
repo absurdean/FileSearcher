@@ -24,7 +24,6 @@ namespace FileSearcher.ViewModels
             _pluginControls = new ObservableCollection<PluginCommon.IView>();
             _pluginNames = new ObservableCollection<string>();
 
-
             pluginHost.RefreshPlugins(PluginNames, PluginControls, _methods);
             _isSearchEnabled = true;
 
@@ -48,7 +47,7 @@ namespace FileSearcher.ViewModels
 
             _changePluginCommand = new DelegateCommand(() =>
             {
-                pluginHost.ChangePlugins(PluginControls,ref _pluginIndex);
+                PluginView=pluginHost.ChangePlugins(PluginControls,ref _pluginIndex);
             });
             _refreshPluginCommand = new DelegateCommand(() =>
             {
@@ -67,7 +66,6 @@ namespace FileSearcher.ViewModels
             });
         }
 
-
         private Window _mainUI;
         public bool AddFileAndRefresh(FileToSearch file)
         {
@@ -82,7 +80,7 @@ namespace FileSearcher.ViewModels
 
         private void Search()
         {
-            if (PluginView != null)
+            if ((PluginView != null)&&(_pluginNames.Count!=0))
             {
                 if ((_filesToSearching.Count != 0) && (_filesToSearching != null))
                 {
@@ -92,14 +90,14 @@ namespace FileSearcher.ViewModels
                     {
                         Task.Run(() =>
                         {
-                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearching, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate,IsStopSearch);
                         });
                     }
                     else
                     {
                         Task.Run(() =>
                         {
-                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate, IsStopSearch);
+                            _isSearchEnabled = _methods[_pluginIndex].SearchFiles(AddFileAndRefresh, _filesToSearchingInCurrentDir, PluginView.SpecialAttribute, LowerSize, UpperSize, FilterDate,IsStopSearch);
                         });
                     }
                 }

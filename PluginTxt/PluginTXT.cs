@@ -10,10 +10,14 @@ namespace PluginTxt
     [Export(typeof(IPlugin))]
     public class PluginTXT : IPlugin
     {
-        public bool SearchFiles(Func<FileToSearch, bool> addFilesAndRefresh, List<FileToSearch> filesToSearch, string specialAttribute, double lowerSize, double upperSize, DateTime filterDate, bool stop)
+        public bool SearchFiles(Func<FileToSearch, bool> addFilesAndRefresh, List<FileToSearch> filesToSearch, string specialAttribute, double lowerSize, double upperSize, DateTime filterDate,bool stop)
         {
             try
             {
+                if (upperSize == 99999999)
+                {
+                    upperSize = 99999999999;
+                }
                 foreach (var file in filesToSearch)
                 {
                     if (stop)

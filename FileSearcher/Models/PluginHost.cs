@@ -7,20 +7,19 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace FileSearcher.Models
 {
     public class PluginHost
     {
-        public PluginHost(ContentControl contentControl, ComboBox comboBox)
+        public PluginHost(ContentControlObject contentControl, ComboBoxObject comboBox)
         {
             _comboBox = comboBox;
             _contentControl = contentControl;
         }
 
-        private ComboBox _comboBox;
-        private ContentControl _contentControl;
+        private ComboBoxObject _comboBox;
+        private ContentControlObject _contentControl;
 
         [ImportMany(typeof(PluginCommon.IView), AllowRecomposition = true)]
         public IEnumerable<Lazy<PluginCommon.IView, IPluginMetadata>> Plugins;
@@ -77,12 +76,12 @@ namespace FileSearcher.Models
                 pluginIndex = 0;
                 if (pluginControls.Count != 0)
                 {
-                    if (_comboBox.SelectedIndex != -1)
+                    if (_comboBox.ComboBox.SelectedIndex != -1)
                     {
-                        pluginIndex = _comboBox.SelectedIndex;
+                        pluginIndex = _comboBox.ComboBox.SelectedIndex;
                     }
                     var pluginView = pluginControls[pluginIndex];
-                    _contentControl.Content = pluginView;
+                    _contentControl.ContentControl.Content = pluginView;
                     return pluginView;
                 }
                 return null;

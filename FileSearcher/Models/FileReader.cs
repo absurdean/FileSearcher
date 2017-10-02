@@ -8,7 +8,7 @@ namespace FileSearcher.Models
 {
     public class FileReader
     {
-        public void GetFilesToShow(string path, List<FileToSearch> filesToShow)
+        public void GetFilesToShow(string path, List<FileToSearch> filesToSearching)
         {
             try
             {               
@@ -16,12 +16,12 @@ namespace FileSearcher.Models
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShow.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
+                    filesToSearching.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
                 }
 
                 foreach (DirectoryInfo d in dir.GetDirectories())
                 {
-                    GetFilesToShow(path + "\\" + d.Name + "\\",filesToShow);
+                    GetFilesToShow(path + "\\" + d.Name + "\\", filesToSearching);
                 }
             }
             catch (Exception e)
@@ -30,19 +30,15 @@ namespace FileSearcher.Models
             }
         }
 
-        public void GetFilesToShowInCurrentDir(string path, List<FileToSearch> filesToShowInCurrentDir)
+        public void GetFilesToShowInCurrentDir(string path, List<FileToSearch> filesToSearchingInCurrentDir)
         {
             try
             {
-                if (filesToShowInCurrentDir != null)
-                {
-                    filesToShowInCurrentDir=new List<FileToSearch>();
-                }
                 DirectoryInfo dir = new DirectoryInfo(path);
                 FileInfo[] files = dir.GetFiles();
                 foreach (FileInfo f in files)
                 {
-                    filesToShowInCurrentDir.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
+                    filesToSearchingInCurrentDir.Add(new FileToSearch(f.Name,f.Length,f.LastWriteTime,f.FullName));
                 }
             }
             catch (Exception e)

@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataGridObject.cs" />
     <Compile Include="FileToSearch.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IPluginMetadata.cs" />

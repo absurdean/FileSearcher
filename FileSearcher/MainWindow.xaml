@@ -9,7 +9,7 @@
     xmlns:models="clr-namespace:FileSearcher.Models"
     xmlns:viewModels="clr-namespace:FileSearcher.ViewModels"
     xmlns:wpftoolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
-    Title="MainWindow"
+    Title="File Searcher"
     Width="600"
     Height="500"
     MinWidth="600"
@@ -124,6 +124,7 @@
             AutoGenerateColumns="False"
             ItemsSource="{Binding FilesToShow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <!--
+                Special header for 2nd filtration
                 ColumnHeaderStyle="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type filter:DataGridHeaderFilterControl},
                 ResourceId=DataGridHeaderFilterControlStyle}}"
             -->
@@ -141,17 +142,7 @@
                     Binding="{Binding LastChangingDate}"
                     Header="Last time changing" />
             </DataGrid.Columns>
-            <!--<DataGrid.Style>
-                <Style TargetType="DataGrid">
-                    <Setter Property="ItemsSource" Value="{Binding FilesToShow}" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=currentFolderCheck, Path=IsChecked}" Value="True">
-                            <Setter Property="ItemsSource" Value="{Binding FilesToShowInCurrentDir}" />
-                        </DataTrigger>
 
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Style>-->
         </DataGrid>
         <StackPanel
             Grid.Row="2"

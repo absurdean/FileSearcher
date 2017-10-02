@@ -9,12 +9,10 @@ namespace FileSearcher.Models
     public class SelectFolderDialog
     {
         private Window _owner;
-        private PluginCommon.DataGridObject _dataGrid;
         private FileReader _fileReader;
-        public SelectFolderDialog(Window owner, PluginCommon.DataGridObject dataGrid)
+        public SelectFolderDialog(Window owner)
         {
             _owner = owner;
-            _dataGrid = dataGrid;
             _fileReader = new FileReader();
         }
         public string SelectFolder()

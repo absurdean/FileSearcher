@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -96,10 +97,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IDataGridObject.cs" />
-    <Compile Include="Models\DataGridObject.cs" />
+    <Compile Include="Models\ComboBoxObject.cs" />
+    <Compile Include="Models\ContentControlObject.cs" />
     <Compile Include="Models\FileSizeConverter.cs" />
     <Compile Include="Models\PluginHost.cs" />
-    <Compile Include="Models\SearchManager.cs" />
     <Compile Include="Models\SelectFolderDialog.cs" />
     <Compile Include="Models\WindowsExtentions.cs" />
     <Compile Include="RangeSlider.xaml.cs">
