@@ -36,9 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataGridFilterLibrary">
-      <HintPath>..\..\..\..\..\Downloads\datagridfilterlibrary_src_vs2010\DataGridFilterLibrary\bin\Debug\DataGridFilterLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
@@ -63,8 +60,9 @@
       <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\obj\Debug\PluginCommon.dll</HintPath>
+    <Reference Include="PluginCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PluginCommon\bin\Release\PluginCommon.dll</HintPath>
     </Reference>
     <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
@@ -143,6 +141,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\FileSearcher.exe.config" />
+    <None Include="bin\Debug\FileSearcher.vshost.exe.config" />
+    <None Include="bin\Debug\FileSearcher.vshost.exe.manifest" />
+    <None Include="bin\Debug\policy.2.0.taglib-sharp.config" />
+    <None Include="bin\Release\FileSearcher.exe.config" />
+    <None Include="bin\Release\FileSearcher.vshost.exe.config" />
+    <None Include="bin\Release\FileSearcher.vshost.exe.manifest" />
+    <None Include="bin\Release\policy.2.0.taglib-sharp.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -153,7 +159,48 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\FileSearcher.exe" />
+    <Content Include="bin\Debug\FileSearcher.pdb" />
+    <Content Include="bin\Debug\FileSearcher.vshost.exe" />
+    <Content Include="bin\Debug\Microsoft.Practices.Prism.Composition.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.Desktop.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.Prism.PubSubEvents.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.pdb" />
+    <Content Include="bin\Debug\PluginCommon.dll" />
+    <Content Include="bin\Debug\PluginCommon.pdb" />
+    <Content Include="bin\Debug\plugins\PluginMp3.dll" />
+    <Content Include="bin\Debug\plugins\PluginTxt.dll" />
+    <Content Include="bin\Debug\policy.2.0.taglib-sharp.dll" />
+    <Content Include="bin\Debug\taglib-sharp.dll" />
+    <Content Include="bin\Release\FileSearcher.exe" />
+    <Content Include="bin\Release\FileSearcher.pdb" />
+    <Content Include="bin\Release\FileSearcher.vshost.exe" />
+    <Content Include="bin\Release\Microsoft.Practices.Prism.Composition.dll" />
+    <Resource Include="bin\Debug\Microsoft.Practices.Prism.Composition.xml" />
+    <Resource Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.xml" />
+    <Resource Include="bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.xml" />
+    <Resource Include="bin\Debug\Microsoft.Practices.ServiceLocation.xml" />
+    <Resource Include="bin\Release\Microsoft.Practices.Prism.Composition.xml" />
+    <Content Include="bin\Release\Microsoft.Practices.Prism.Mvvm.Desktop.dll" />
+    <Content Include="bin\Release\Microsoft.Practices.Prism.Mvvm.dll" />
+    <Resource Include="bin\Release\Microsoft.Practices.Prism.Mvvm.xml" />
+    <Content Include="bin\Release\Microsoft.Practices.Prism.PubSubEvents.dll" />
+    <Content Include="bin\Release\Microsoft.Practices.Prism.SharedInterfaces.dll" />
+    <Resource Include="bin\Release\Microsoft.Practices.Prism.SharedInterfaces.xml" />
+    <Content Include="bin\Release\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="bin\Release\Microsoft.Practices.ServiceLocation.pdb" />
+    <Resource Include="bin\Release\Microsoft.Practices.ServiceLocation.xml" />
+    <Content Include="bin\Release\PluginCommon.dll" />
+    <Content Include="bin\Release\PluginCommon.pdb" />
+    <Content Include="bin\Release\plugins\PluginMp3.dll" />
+    <Content Include="bin\Release\plugins\PluginTxt.dll" />
+    <Content Include="bin\Release\policy.2.0.taglib-sharp.dll" />
+    <Content Include="bin\Release\taglib-sharp.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

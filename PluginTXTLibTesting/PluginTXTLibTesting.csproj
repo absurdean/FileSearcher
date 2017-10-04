@@ -36,7 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\obj\Debug\PluginCommon.dll</HintPath>
+      <HintPath>..\PluginCommon\bin\Debug\PluginCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginTxt">
+      <HintPath>..\PluginTxt\bin\Release\PluginTxt.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -61,10 +64,13 @@
       <Project>{35021775-0386-41c0-b8e2-d22e9d30cef0}</Project>
       <Name>FileSearcher</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PluginTxt\PluginTxt.csproj">
-      <Project>{1c97f21b-6f93-4cc7-bb35-54a4c7979020}</Project>
-      <Name>PluginTxt</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\testfiles\license.txt" />
+    <Content Include="bin\Debug\testfiles\Orkestr_Che_-_Guten_Morgen_Mayakovsky_33.txt" />
+    <Content Include="bin\Debug\testfiles\README.TXT" />
+    <Content Include="bin\Debug\testfiles\rightS.txt" />
+    <Content Include="bin\Debug\testfiles\Serial.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
