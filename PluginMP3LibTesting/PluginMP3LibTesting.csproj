@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\bin\Release\PluginCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="PluginMp3">
-      <HintPath>..\PluginMp3\bin\Release\PluginMp3.dll</HintPath>
-    </Reference>
     <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +65,14 @@
     <ProjectReference Include="..\FileSearcher\FileSearcher.csproj">
       <Project>{35021775-0386-41c0-b8e2-d22e9d30cef0}</Project>
       <Name>FileSearcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PluginCommon\PluginCommon.csproj">
+      <Project>{de40f8ea-1cb9-45e6-a70b-13db48fdbaee}</Project>
+      <Name>PluginCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PluginMp3\PluginMp3.csproj">
+      <Project>{ba505862-b12b-48f7-8a3e-4900e3f0b4c8}</Project>
+      <Name>PluginMp3</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

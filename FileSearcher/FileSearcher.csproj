@@ -60,10 +60,6 @@
       <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PluginCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PluginCommon\bin\Release\PluginCommon.dll</HintPath>
-    </Reference>
     <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
       <Private>True</Private>
@@ -141,14 +137,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\FileSearcher.exe.config" />
-    <None Include="bin\Debug\FileSearcher.vshost.exe.config" />
-    <None Include="bin\Debug\FileSearcher.vshost.exe.manifest" />
-    <None Include="bin\Debug\policy.2.0.taglib-sharp.config" />
-    <None Include="bin\Release\FileSearcher.exe.config" />
-    <None Include="bin\Release\FileSearcher.vshost.exe.config" />
-    <None Include="bin\Release\FileSearcher.vshost.exe.manifest" />
-    <None Include="bin\Release\policy.2.0.taglib-sharp.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -160,46 +148,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\FileSearcher.exe" />
-    <Content Include="bin\Debug\FileSearcher.pdb" />
-    <Content Include="bin\Debug\FileSearcher.vshost.exe" />
-    <Content Include="bin\Debug\Microsoft.Practices.Prism.Composition.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.Desktop.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.Prism.PubSubEvents.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.pdb" />
-    <Content Include="bin\Debug\PluginCommon.dll" />
-    <Content Include="bin\Debug\PluginCommon.pdb" />
+    <ProjectReference Include="..\PluginCommon\PluginCommon.csproj">
+      <Project>{de40f8ea-1cb9-45e6-a70b-13db48fdbaee}</Project>
+      <Name>PluginCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="bin\Debug\plugins\PluginMp3.dll" />
     <Content Include="bin\Debug\plugins\PluginTxt.dll" />
-    <Content Include="bin\Debug\policy.2.0.taglib-sharp.dll" />
-    <Content Include="bin\Debug\taglib-sharp.dll" />
-    <Content Include="bin\Release\FileSearcher.exe" />
-    <Content Include="bin\Release\FileSearcher.pdb" />
-    <Content Include="bin\Release\FileSearcher.vshost.exe" />
-    <Content Include="bin\Release\Microsoft.Practices.Prism.Composition.dll" />
-    <Resource Include="bin\Debug\Microsoft.Practices.Prism.Composition.xml" />
-    <Resource Include="bin\Debug\Microsoft.Practices.Prism.Mvvm.xml" />
-    <Resource Include="bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.xml" />
-    <Resource Include="bin\Debug\Microsoft.Practices.ServiceLocation.xml" />
-    <Resource Include="bin\Release\Microsoft.Practices.Prism.Composition.xml" />
-    <Content Include="bin\Release\Microsoft.Practices.Prism.Mvvm.Desktop.dll" />
-    <Content Include="bin\Release\Microsoft.Practices.Prism.Mvvm.dll" />
-    <Resource Include="bin\Release\Microsoft.Practices.Prism.Mvvm.xml" />
-    <Content Include="bin\Release\Microsoft.Practices.Prism.PubSubEvents.dll" />
-    <Content Include="bin\Release\Microsoft.Practices.Prism.SharedInterfaces.dll" />
-    <Resource Include="bin\Release\Microsoft.Practices.Prism.SharedInterfaces.xml" />
-    <Content Include="bin\Release\Microsoft.Practices.ServiceLocation.dll" />
-    <Content Include="bin\Release\Microsoft.Practices.ServiceLocation.pdb" />
-    <Resource Include="bin\Release\Microsoft.Practices.ServiceLocation.xml" />
-    <Content Include="bin\Release\PluginCommon.dll" />
-    <Content Include="bin\Release\PluginCommon.pdb" />
     <Content Include="bin\Release\plugins\PluginMp3.dll" />
     <Content Include="bin\Release\plugins\PluginTxt.dll" />
-    <Content Include="bin\Release\policy.2.0.taglib-sharp.dll" />
-    <Content Include="bin\Release\taglib-sharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

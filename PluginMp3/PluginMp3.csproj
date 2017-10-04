@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\bin\Release\PluginCommon.dll</HintPath>
-    </Reference>
     <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
       <Private>True</Private>
@@ -73,8 +70,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\PluginMp3.dll" />
-    <Content Include="bin\Release\PluginMp3.dll" />
+    <ProjectReference Include="..\PluginCommon\PluginCommon.csproj">
+      <Project>{de40f8ea-1cb9-45e6-a70b-13db48fdbaee}</Project>
+      <Name>PluginCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

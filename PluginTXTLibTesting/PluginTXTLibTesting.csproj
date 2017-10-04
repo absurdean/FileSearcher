@@ -35,12 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PluginCommon">
-      <HintPath>..\PluginCommon\bin\Debug\PluginCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="PluginTxt">
-      <HintPath>..\PluginTxt\bin\Release\PluginTxt.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -63,6 +57,14 @@
     <ProjectReference Include="..\FileSearcher\FileSearcher.csproj">
       <Project>{35021775-0386-41c0-b8e2-d22e9d30cef0}</Project>
       <Name>FileSearcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PluginCommon\PluginCommon.csproj">
+      <Project>{de40f8ea-1cb9-45e6-a70b-13db48fdbaee}</Project>
+      <Name>PluginCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PluginTxt\PluginTxt.csproj">
+      <Project>{1c97f21b-6f93-4cc7-bb35-54a4c7979020}</Project>
+      <Name>PluginTxt</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
