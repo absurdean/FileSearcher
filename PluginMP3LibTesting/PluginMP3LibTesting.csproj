@@ -75,6 +75,12 @@
       <Name>PluginMp3</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\testfiles\02 AFI - I Hope You Suffer.mp3" />
+    <Content Include="bin\Debug\testfiles\05-Heart-Shaped Box.mp3" />
+    <Content Include="bin\Debug\testfiles\05. Wasted.mp3" />
+    <Content Include="bin\Debug\testfiles\06  Light My Fire.mp3" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

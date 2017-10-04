@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using PluginMp3;
 using System.Linq;
+using System.IO;
+using System.Reflection;
 
 namespace PluginMP3LibTesting
 {
@@ -15,7 +17,7 @@ namespace PluginMP3LibTesting
         private List<FileToSearch> _filesToSearching= new List<FileToSearch>();
         public ObservableCollection<FileToSearch> FilesToShow= new ObservableCollection<FileToSearch>();
         private bool _isStopSearch = false;
-        private string _pathForTesting= @"F:\music new\dif";
+        private string _pathForTesting = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "testfiles");
 
         public bool AddFileAndRefresh(FileToSearch file)
         {
